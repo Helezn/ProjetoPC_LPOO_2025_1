@@ -5,14 +5,27 @@
 package br.edu.ifsul.cc.lpoo.pc.model;
 
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  *
  * @author acer
  */
+
+@Entity
+@Table(name = "tb_cliente")
+@DiscriminatorValue("C")
+
 public class Cliente extends Pessoa {
+    
+       @Column (nullable = false, length = 50) //n precisa id pois herda de pessoa
     private String cnpj;
+    
+    @Column (nullable = false, length = 50)
     private Calendar data_ultima_compra;
+    
+    @Column (nullable = false, precision = 2)
     private Float valor_compras;
 
     public Cliente() {

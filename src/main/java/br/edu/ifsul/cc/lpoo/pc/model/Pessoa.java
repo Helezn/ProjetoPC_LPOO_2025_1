@@ -5,30 +5,56 @@
 package br.edu.ifsul.cc.lpoo.pc.model;
 
 import java.util.Calendar;
-
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 /**
  *
  * @author acer
  */
+
+@Entity
+@Table(name = "tb_pessoa")
+
+//aqui não irá se repetir pois é um classe pai
+@Inheritance(strategy = InheritanceType.JOINED)//alterar a estratégia.
+@DiscriminatorColumn(name = "tipo")
+
 public abstract class Pessoa {
     
+    @Id //indica chave primaria
     private String cpf;
+    
+    @Column (nullable = false, length = 50)
     private String rg;
+    
+    @Column (nullable = false, length = 100)
     private String nome;
+    
+    @Column (nullable = false, length = 8)
     private String senha;
+    
+    @Column (nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_nascimento;
+    
+    @Column (nullable = false, length = 8)
     private String cep;
+    
+    @Column (nullable = false, length = 8)
     private String numero;
+    
+    @Column (nullable = false, length = 8)
     private String complemento;
+    
+    @Column (nullable = false)
     private Boolean status;
-           
-    public Pessoa(){
-//        String cpf, String rg, String nome, String senha, Calendar data_nascimento, String cep, String numero, String complemento, Boolean status
-//        this.cpf = cpf;
-//        this.nome = nome;
-//        this.telefone = telefone;
-//        this.email = email;
-    }
 
     public String getCpf() {
         return cpf;
